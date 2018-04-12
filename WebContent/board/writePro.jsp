@@ -17,4 +17,3 @@
   
   response.sendRedirect("list.jsp");
 %>
-<!-- sadkfljlsdjfl -->
