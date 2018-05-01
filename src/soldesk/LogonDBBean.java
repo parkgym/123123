@@ -207,7 +207,6 @@ public class LogonDBBean {
 	
 	
 	
-	
 	public Vector zipcodeRead(String area3) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

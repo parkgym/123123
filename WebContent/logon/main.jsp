@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ include file="./color.jsp" %>
+<%@ page import = "util.CookieBox" %>
 <html>
 <head>
 <title>메인입니다.</title>
@@ -34,19 +35,29 @@ return false;
 </head>
 
 <body onLoad="focusIt();" bgcolor="<%= bodyback_c %>">
-  <table width=500 cellpadding="0" cellspacing="0" align="center" border="1">
+<%
+  CookieBox cookieBox = new CookieBox(request);
+%>
+  <table width=500 cellpadding="0" cellspacing="2" align="center" border="1">
     <tr>
       <td width="300" bgcolor="<%= bodyback_c %>" height="20">
       &nbsp;
       </td>
       <form name="inform" method="post" action="loginPro.jsp" onSubmit="return checkIt();">
-      
+      <%
+ if(cookieBox.exists("ID")){
+%> 
       <td bgcolor="<%=title_c %>" width="100" align="right">아이디</td>
       <td width="100" bgcolor="<%= value_c %>">
-        <input type="text" name="id" size="15" maclength="10"></td>
+        <input type="text" name="id" size="15" maclength="10" value="<%= cookieBox.getValue("ID") %>"></td>
+<% } else { %>
+      <td bgcolor="<%=title_c %>" width="100" align="right">아이디</td>
+      <td width="100" bgcolor="<%= value_c %>">
+        <input type="text" name="id" size="15" maclength="10" ></td>
+<% } %>
     </tr>
     <tr>
-      <td rowspan="2" bgcolor="<%= bodyback_c %>" width="300" > 메인입니다.</td>
+      <td rowspan="3" bgcolor="<%= bodyback_c %>" width="300" > 메인입니다.</td>
       <td bgcolor="<%= title_c %>" width="100" align="right"> 패스워드</td>
       <td width="100" bgcolor="<%= value_c %>">
         <input type="password" name="passwd" size="15" maxlength="10"></td>
@@ -55,7 +66,13 @@ return false;
       <td colspan="3" bgcolor="<%= title_c %>" align="center">
         <input type="submit" name="Submit" value="로그인">
         <input type="button" value="회원가입" onclick="javascript:window.location='inputForm.jsp'">
-        </td></form></tr></table>
+        <input type="checkbox" name="save" value="true">id저장
+        </td></tr>
+    <tr>
+      <td colspan="3" bgcolor="<%= title_c %>" align="center">
+        <input type="button" value="id/pass찾기" onclick="javascript:window.location='find.jsp'">
+      </td></form></table>
+    </tr>
       <%}else{ %>
         <table width=500 cellpadding="0" cellspacing="0" align="center" border="1" >
           <tr>
